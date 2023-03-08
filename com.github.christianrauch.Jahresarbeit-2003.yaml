@@ -1,6 +1,6 @@
 app-id: com.github.christianrauch.Jahresarbeit-2003
 runtime: org.freedesktop.Platform
-runtime-version: "21.08"
+runtime-version: "22.08"
 sdk: org.freedesktop.Sdk
 command: /app/ja2003
 finish-args:
@@ -20,8 +20,8 @@ modules:
   - name: libdecor
     sources:
     - type: git
-      url: https://gitlab.gnome.org/jadahl/libdecor.git
-      tag: "0.1.0"
+      url: https://gitlab.freedesktop.org/libdecor/libdecor.git
+      tag: "0.1.1"
     buildsystem: meson
     builddir: true
 
