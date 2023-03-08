@@ -1,6 +1,6 @@
 app-id: com.github.christianrauch.Jahresarbeit-2003
 runtime: org.freedesktop.Platform
-runtime-version: "21.08"
+runtime-version: "22.08"
 sdk: org.freedesktop.Sdk
 command: /app/ja2003
 finish-args:
@@ -20,20 +20,19 @@ modules:
   - name: libdecor
     sources:
     - type: git
-      url: https://gitlab.gnome.org/jadahl/libdecor.git
-      tag: "0.1.0"
+      url: https://gitlab.freedesktop.org/libdecor/libdecor.git
+      tag: "0.1.1"
     buildsystem: meson
     builddir: true
 
   - name: SDL2
     sources:
-    - type: archive
-      url: https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.0.18.tar.gz
-      sha256: b7061be3d86d14cdddbc696ab5b377ed28418f33be256c92215a57363329aa5f
+    - type: git
+      url: https://github.com/libsdl-org/SDL.git
+      tag: "release-2.26.4"
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-    - -DCMAKE_BUILD_TYPE=Release
     # subsystems
     - -DSDL_ATOMIC=OFF
     - -DSDL_AUDIO=OFF
@@ -44,13 +43,12 @@ modules:
     - -DSDL_HAPTIC=ON
     - -DSDL_HIDAPI=OFF
     - -DSDL_POWER=OFF
-    - -DSDL_THREADS=OFF
+    - -DSDL_THREADS=ON
     - -DSDL_TIMERS=OFF
     - -DSDL_FILE=OFF
     - -DSDL_LOADSO=ON
     - -DSDL_CPUINFO=OFF
     - -DSDL_FILESYSTEM=ON
-    - -DSDL_DLOPEN=OFF
     - -DSDL_SENSOR=OFF
     - -DSDL_LOCALE=OFF
     # Wayland build with libdecor support
@@ -58,39 +56,42 @@ modules:
 
   - name: SDL2-ttf
     sources:
-    - type: archive
-      url: https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.0.15.tar.gz
-      sha256: 02e887b560faf398cbd60f56ce0a1cbaf96012dd4ddaa455f8307cb4911c86cc
+    - type: git
+      url: https://github.com/libsdl-org/SDL_ttf.git
+      tag: release-2.20.2
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-    - -DCMAKE_BUILD_TYPE=Release
+    - -D SDL2TTF_SAMPLES=OFF
 
   - name: SDL2-image
     sources:
     - type: git
       url: https://github.com/libsdl-org/SDL_image.git
-      commit: a31da6b
-    buildsystem: autotools
+      tag: release-2.6.3
+    buildsystem: cmake-ninja
+    builddir: true
     config-opts:
-    - --disable-bmp
-    - --enable-gif
-    - --enable-jpg
-    - --disable-jpg-shared
-    - --disable-lbm
-    - --disable-pcx
-    - --disable-png
-    - --disable-png-shared
-    - --disable-pnm
-    - --disable-svg
-    - --disable-tga
-    - --disable-tif
-    - --disable-tif-shared
-    - --disable-xcf
-    - --disable-xpm
-    - --disable-xv
-    - --disable-webp
-    - --disable-webp-shared
+    - -D SDL2IMAGE_DEPS_SHARED=OFF
+    - -D SDL2IMAGE_SAMPLES=OFF
+    # image formats
+    - -D SDL2IMAGE_AVIF=OFF
+    - -D SDL2IMAGE_BMP=OFF
+    - -D SDL2IMAGE_GIF=ON
+    - -D SDL2IMAGE_JPG=ON
+    - -D SDL2IMAGE_JXL=OFF
+    - -D SDL2IMAGE_LBM=OFF
+    - -D SDL2IMAGE_PCX=OFF
+    - -D SDL2IMAGE_PNG=OFF
+    - -D SDL2IMAGE_PNM=OFF
+    - -D SDL2IMAGE_QOI=OFF
+    - -D SDL2IMAGE_SVG=OFF
+    - -D SDL2IMAGE_TGA=OFF
+    - -D SDL2IMAGE_TIF=OFF
+    - -D SDL2IMAGE_WEBP=OFF
+    - -D SDL2IMAGE_XCF=OFF
+    - -D SDL2IMAGE_XPM=OFF
+    - -D SDL2IMAGE_XV=OFF
 
   - name: JA2003
     sources:
