@@ -2,7 +2,7 @@ app-id: com.github.christianrauch.Jahresarbeit-2003
 runtime: org.freedesktop.Platform
 runtime-version: "22.08"
 sdk: org.freedesktop.Sdk
-command: /app/ja2003
+command: ja2003
 finish-args:
 - --socket=wayland
 - --socket=fallback-x11
@@ -10,7 +10,6 @@ finish-args:
 - --share=ipc
 cleanup:
 - /include
-- /bin
 - /lib/cmake
 - /lib/pkg-config
 - /share/aclocal
@@ -103,7 +102,18 @@ modules:
     config-opts:
     - -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
-  - name: launcher
+  - name: launcher-cli
+    sources:
+    - type: script
+      dest-filename: ja2003
+      commands:
+      - /app/ja2003
+    buildsystem: simple
+    build-commands:
+    - install -d /app/bin/
+    - install -m744 ja2003 /app/bin/ja2003
+
+  - name: launcher-gui
     sources:
     - type: file
       path: ja2003.desktop
