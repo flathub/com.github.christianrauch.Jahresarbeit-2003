@@ -1,8 +1,8 @@
 app-id: com.github.christianrauch.Jahresarbeit-2003
 runtime: org.freedesktop.Platform
-runtime-version: "22.08"
+runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
-command: /app/ja2003
+command: ja2003
 finish-args:
 - --socket=wayland
 - --socket=fallback-x11
@@ -10,89 +10,12 @@ finish-args:
 - --share=ipc
 cleanup:
 - /include
-- /bin
 - /lib/cmake
 - /lib/pkg-config
 - /share/aclocal
 - "*.a"
 
 modules:
-  - name: libdecor
-    sources:
-    - type: git
-      url: https://gitlab.freedesktop.org/libdecor/libdecor.git
-      tag: "0.1.1"
-    buildsystem: meson
-    builddir: true
-
-  - name: SDL2
-    sources:
-    - type: git
-      url: https://github.com/libsdl-org/SDL.git
-      tag: "release-2.26.4"
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-    # subsystems
-    - -DSDL_ATOMIC=OFF
-    - -DSDL_AUDIO=OFF
-    - -DSDL_VIDEO=ON
-    - -DSDL_RENDER=ON
-    - -DSDL_EVENTS=ON
-    - -DSDL_JOYSTICK=ON
-    - -DSDL_HAPTIC=ON
-    - -DSDL_HIDAPI=OFF
-    - -DSDL_POWER=OFF
-    - -DSDL_THREADS=ON
-    - -DSDL_TIMERS=OFF
-    - -DSDL_FILE=OFF
-    - -DSDL_LOADSO=ON
-    - -DSDL_CPUINFO=OFF
-    - -DSDL_FILESYSTEM=ON
-    - -DSDL_SENSOR=OFF
-    - -DSDL_LOCALE=OFF
-    # Wayland build with libdecor support
-    - -DSDL_WAYLAND_LIBDECOR=ON
-
-  - name: SDL2-ttf
-    sources:
-    - type: git
-      url: https://github.com/libsdl-org/SDL_ttf.git
-      tag: release-2.20.2
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-    - -D SDL2TTF_SAMPLES=OFF
-
-  - name: SDL2-image
-    sources:
-    - type: git
-      url: https://github.com/libsdl-org/SDL_image.git
-      tag: release-2.6.3
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-    - -D SDL2IMAGE_DEPS_SHARED=OFF
-    - -D SDL2IMAGE_SAMPLES=OFF
-    # image formats
-    - -D SDL2IMAGE_AVIF=OFF
-    - -D SDL2IMAGE_BMP=OFF
-    - -D SDL2IMAGE_GIF=ON
-    - -D SDL2IMAGE_JPG=ON
-    - -D SDL2IMAGE_JXL=OFF
-    - -D SDL2IMAGE_LBM=OFF
-    - -D SDL2IMAGE_PCX=OFF
-    - -D SDL2IMAGE_PNG=OFF
-    - -D SDL2IMAGE_PNM=OFF
-    - -D SDL2IMAGE_QOI=OFF
-    - -D SDL2IMAGE_SVG=OFF
-    - -D SDL2IMAGE_TGA=OFF
-    - -D SDL2IMAGE_TIF=OFF
-    - -D SDL2IMAGE_WEBP=OFF
-    - -D SDL2IMAGE_XCF=OFF
-    - -D SDL2IMAGE_XPM=OFF
-    - -D SDL2IMAGE_XV=OFF
-
   - name: JA2003
     sources:
     - type: git
@@ -103,7 +26,18 @@ modules:
     config-opts:
     - -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
-  - name: launcher
+  - name: launcher-cli
+    sources:
+    - type: script
+      dest-filename: ja2003
+      commands:
+      - /app/ja2003
+    buildsystem: simple
+    build-commands:
+    - install -d /app/bin/
+    - install -m744 ja2003 /app/bin/ja2003
+
+  - name: launcher-gui
     sources:
     - type: file
       path: ja2003.desktop
