@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>com.github.christianrauch.Jahresarbeit-2003</id>
-  
+
   <name>Jahresarbeit 2003</name>
   <summary xml:lang="de">Find die größte Fläche von zusammenhängenden Quadraten</summary>
   <summary>Find the largest area of connected squares</summary>
 
+  <developer id="com.github.christianrauch">
+    <name>Christian Rauch</name>
+  </developer>
+
   <url type="homepage">https://github.com/christianrauch/Jahresarbeit-2003</url>
-  
+
   <project_license>GPL-2.0 AND OFL-1.1 AND Apache-2.0</project_license>
   <metadata_license>CC0-1.0</metadata_license>
-  
+
   <recommends>
     <display_length compare="ge">1024</display_length>
   </recommends>
-  
+
   <description xml:lang="de">
     <p>
       Das Programm &quot;Jahresarbeit 2003&quot; entstand als Jahresarbeit im Fach Informatik. Nach Spielstart sieht man ein 9x9 Feld mit verschiedenfarbigen Quadraten. Am Rand des Feldes sind Pfeile zu erkennen, welche genutzt werden um die Reihen und Spalten in denen sich die Quadrate befinden zu verschieben. Zusammenhängende gleichfarbige Quadrate bilden eine Fläche, welche durch draufklicken entfernt wird. Ziel des Spieles ist es eine möglichst große Fläche in kürzester Zeit weg zu klicken. Das Spiel ist zu Ende wenn alle Quadrate entfernt sind oder es keine Möglichkeit mehr gibt um die restlichen Quadrate zu entfernen. Jedoch sollte man um alle Quadrate zu entfernen so wenig Klicks wie möglich gebrauchen, da diese die Endpunktzahl verringern.
@@ -31,7 +35,7 @@
   <releases>
     <release date="2021-12-26" version="2.0"/>
   </releases>
-  
+
   <launchable type="desktop-id">com.github.christianrauch.Jahresarbeit-2003.desktop</launchable>
 
   <screenshots>
