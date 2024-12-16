@@ -1,6 +1,6 @@
 app-id: com.github.christianrauch.Jahresarbeit-2003
 runtime: org.freedesktop.Platform
-runtime-version: "23.08"
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 command: ja2003
 finish-args:
