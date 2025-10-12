@@ -20,10 +20,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/christianrauch/Jahresarbeit-2003.git
-        tag: '2.1'
+        tag: '2.2'
         x-checker-data:
           type: git
           tag-pattern: ^([\d.]+)$
+        commit: 2a2c9cc3c54e5569068cd4fb9a2a9542eb9e1d70
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
