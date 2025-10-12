@@ -1,56 +1,60 @@
 app-id: com.github.christianrauch.Jahresarbeit-2003
 runtime: org.freedesktop.Platform
-runtime-version: "25.08"
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: ja2003
 finish-args:
-- --socket=wayland
-- --socket=fallback-x11
-- --device=dri
-- --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --share=ipc
 cleanup:
-- /include
-- /lib/cmake
-- /lib/pkg-config
-- /share/aclocal
-- "*.a"
+  - /include
+  - /lib/cmake
+  - /lib/pkg-config
+  - /share/aclocal
+  - '*.a'
 
 modules:
   - name: JA2003
     sources:
-    - type: git
-      url: https://github.com/christianrauch/Jahresarbeit-2003.git
-      tag: "2.1"
+      - type: git
+        url: https://github.com/christianrauch/Jahresarbeit-2003.git
+        tag: '2.2'
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
+        commit: 2a2c9cc3c54e5569068cd4fb9a2a9542eb9e1d70
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-    - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
   - name: launcher-cli
     sources:
-    - type: script
-      dest-filename: ja2003
-      commands:
-      - /app/ja2003
+      - type: script
+        dest-filename: ja2003
+        commands:
+          - /app/ja2003
     buildsystem: simple
     build-commands:
-    - install -d /app/bin/
-    - install -m744 ja2003 /app/bin/ja2003
+      - install -d /app/bin/
+      - install -m744 ja2003 /app/bin/ja2003
 
   - name: launcher-gui
     sources:
-    - type: file
-      path: ja2003.desktop
-    - type: file
-      url: https://raw.githubusercontent.com/christianrauch/Jahresarbeit-2003/master/icon1.svg
-      sha256: 911dbd92eb76cc8534e2210b68836b7e3a1e2a3672bfe47e6e211134d81eeffe
-    - type: file
-      path: ja2003.appdata.xml
+      - type: file
+        path: ja2003.desktop
+      - type: file
+        url: https://raw.githubusercontent.com/christianrauch/Jahresarbeit-2003/master/icon1.svg
+        sha256: 911dbd92eb76cc8534e2210b68836b7e3a1e2a3672bfe47e6e211134d81eeffe
+      - type: file
+        path: ja2003.appdata.xml
     buildsystem: simple
     build-commands:
-    - install -d /app/share/applications
-    - install -m644 ja2003.desktop /app/share/applications/com.github.christianrauch.Jahresarbeit-2003.desktop
-    - install -d /app/share/icons/hicolor/scalable/apps
-    - install -m644 icon1.svg /app/share/icons/hicolor/scalable/apps/com.github.christianrauch.Jahresarbeit-2003.svg
-    - install -d /app/share/metainfo
-    - install -m644 ja2003.appdata.xml /app/share/metainfo/com.github.christianrauch.Jahresarbeit-2003.appdata.xml
+      - install -d /app/share/applications
+      - install -m644 ja2003.desktop /app/share/applications/com.github.christianrauch.Jahresarbeit-2003.desktop
+      - install -d /app/share/icons/hicolor/scalable/apps
+      - install -m644 icon1.svg /app/share/icons/hicolor/scalable/apps/com.github.christianrauch.Jahresarbeit-2003.svg
+      - install -d /app/share/metainfo
+      - install -m644 ja2003.appdata.xml /app/share/metainfo/com.github.christianrauch.Jahresarbeit-2003.appdata.xml
